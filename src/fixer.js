@@ -1,4 +1,4 @@
-let EXIF = require("exif-js")
+import exifr from 'exifr';
 
 const getURLBase64 = function(url) {
     return new Promise((resolve, reject) => {
@@ -25,10 +25,9 @@ const getURLBase64 = function(url) {
 
 const getOri = function(file) {
     return new Promise(resolve => {
-        EXIF.getData(file, function() {
-            let orientation = EXIF.getTag(this, "Orientation");
-            resolve(orientation)
-        });
+        exifr.parse(file).then((e) => {
+            resolve(e?.Orientation)
+        })
     })
 }
 

@@ -12,11 +12,12 @@
     "build": "parcel build"
   },
   "author": "tower1229@foxmail.com",
-  "dependencies": {
-    "exif-js": "^2.3.0"
-  },
   "devDependencies": {
+    "buffer": "^6.0.3",
     "parcel": "^2.3.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "exifr": "^7.1.3"
+  }
 }

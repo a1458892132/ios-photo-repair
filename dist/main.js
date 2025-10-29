@@ -1,4 +1,9 @@
-var $1FWPs$exifjs = require("exif-js");
+var $1FWPs$exifr = require("exifr");
+
+
+function $parcel$interopDefault(a) {
+  return a && a.__esModule ? a.default : a;
+}
 
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
@@ -31,9 +36,8 @@ const $2d80769cbe24e221$var$getURLBase64 = function(url) {
 };
 const $2d80769cbe24e221$var$getOri = function(file) {
     return new Promise((resolve)=>{
-        $1FWPs$exifjs.getData(file, function() {
-            let orientation = $1FWPs$exifjs.getTag(this, "Orientation");
-            resolve(orientation);
+        (0, ($parcel$interopDefault($1FWPs$exifr))).parse(file).then((e)=>{
+            resolve(e?.Orientation);
         });
     });
 };
@@ -57,9 +61,9 @@ const $2d80769cbe24e221$var$imgToCanvas = function(img, orientation) {
 const $2d80769cbe24e221$export$333f7af172343a1 = function(selector) {
     const fixImg = function(img) {
         if (!img.dataset.iosfixed) $2d80769cbe24e221$var$getOri(img).then((orientation)=>{
-            if (orientation == 6) $2d80769cbe24e221$var$imgToCanvas(img, orientation).then((canvas1)=>{
+            if (orientation == 6) $2d80769cbe24e221$var$imgToCanvas(img, orientation).then((canvas)=>{
                 try {
-                    img.src = canvas1.toDataURL();
+                    img.src = canvas.toDataURL();
                     img.dataset.iosfixed = true;
                 } catch (e) {
                     $2d80769cbe24e221$var$getURLBase64(img.src).then((base64)=>{
@@ -120,8 +124,7 @@ const $2d80769cbe24e221$export$9fe3fb24d050ce98 = function(file, option) {
         maxHeight: null,
         ratio: 2,
         outType: 'base64' // base64 | blob
-    }, option || {
-    });
+    }, option || {});
     return new Promise((resolve, reject)=>{
         if (file.type.indexOf('image/') === 0) $2d80769cbe24e221$var$getOri(file).then((orientation)=>{
             let oReader = new FileReader();
@@ -152,7 +155,7 @@ const $2d80769cbe24e221$export$9fe3fb24d050ce98 = function(file, option) {
         }).catch((err)=>{
             reject(err);
         });
-        else reject('非图片文件不支持压缩');
+        else reject("\u975E\u56FE\u7247\u6587\u4EF6\u4E0D\u652F\u6301\u538B\u7F29");
     });
 };
 

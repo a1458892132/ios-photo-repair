@@ -1,4 +1,4 @@
-import {getData as $3HI9v$getData, getTag as $3HI9v$getTag} from "exif-js";
+import $3HI9v$exifr from "exifr";
 
 
 const $5b02762f359a5b4d$var$getURLBase64 = function(url) {
@@ -25,9 +25,8 @@ const $5b02762f359a5b4d$var$getURLBase64 = function(url) {
 };
 const $5b02762f359a5b4d$var$getOri = function(file) {
     return new Promise((resolve)=>{
-        $3HI9v$getData(file, function() {
-            let orientation = $3HI9v$getTag(this, "Orientation");
-            resolve(orientation);
+        (0, $3HI9v$exifr).parse(file).then((e)=>{
+            resolve(e?.Orientation);
         });
     });
 };
@@ -51,9 +50,9 @@ const $5b02762f359a5b4d$var$imgToCanvas = function(img, orientation) {
 const $5b02762f359a5b4d$export$333f7af172343a1 = function(selector) {
     const fixImg = function(img) {
         if (!img.dataset.iosfixed) $5b02762f359a5b4d$var$getOri(img).then((orientation)=>{
-            if (orientation == 6) $5b02762f359a5b4d$var$imgToCanvas(img, orientation).then((canvas1)=>{
+            if (orientation == 6) $5b02762f359a5b4d$var$imgToCanvas(img, orientation).then((canvas)=>{
                 try {
-                    img.src = canvas1.toDataURL();
+                    img.src = canvas.toDataURL();
                     img.dataset.iosfixed = true;
                 } catch (e) {
                     $5b02762f359a5b4d$var$getURLBase64(img.src).then((base64)=>{
@@ -114,8 +113,7 @@ const $5b02762f359a5b4d$export$9fe3fb24d050ce98 = function(file, option) {
         maxHeight: null,
         ratio: 2,
         outType: 'base64' // base64 | blob
-    }, option || {
-    });
+    }, option || {});
     return new Promise((resolve, reject)=>{
         if (file.type.indexOf('image/') === 0) $5b02762f359a5b4d$var$getOri(file).then((orientation)=>{
             let oReader = new FileReader();
@@ -146,7 +144,7 @@ const $5b02762f359a5b4d$export$9fe3fb24d050ce98 = function(file, option) {
         }).catch((err)=>{
             reject(err);
         });
-        else reject('非图片文件不支持压缩');
+        else reject("\u975E\u56FE\u7247\u6587\u4EF6\u4E0D\u652F\u6301\u538B\u7F29");
     });
 };
 

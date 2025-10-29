@@ -15,13 +15,13 @@
 1. 使用npm安装:
 
 ```shell
-npm i ios-photo-repair --save
+npm i ios-photo-repair-plus --save
 ```
 
 2. 导入到项目
 
 ```shell
-let { fixBySelector, fixImgFile } = require("ios-photo-repair")
+let { fixBySelector, fixImgFile } = require("ios-photo-repair-plus")
 ```
 
 3. 修复来自上传控件的图片文件

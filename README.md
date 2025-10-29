@@ -15,13 +15,13 @@ Simple and direct, two methods to solve two kinds of repair requirements in WEB 
 1. install with npm:
 
 ```shell
-npm i ios-photo-repair --save
+npm i ios-photo-repair-plus --save
 ```
 
 2. import to your project
 
 ```shell
-let { fixBySelector, fixImgFile } = require("ios-photo-repair")
+let { fixBySelector, fixImgFile } = require("ios-photo-repair-plus")
 ```
 
 3. Fix the image file obtained by `input:type=file`
